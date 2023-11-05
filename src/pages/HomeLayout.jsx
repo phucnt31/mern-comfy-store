@@ -5,7 +5,9 @@ const HomeLayout = () => {
   return (
     <>
       <nav>nav</nav>
-      <Outlet />
+      <section className="align-element py-20">
+        <Outlet />
+      </section>
     </>
   );
 };
