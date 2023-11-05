@@ -1,7 +1,13 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {
-  return <div>HomeLayout</div>;
+  return (
+    <>
+      <nav>nav</nav>
+      <Outlet />
+    </>
+  );
 };
 
 export default HomeLayout;
