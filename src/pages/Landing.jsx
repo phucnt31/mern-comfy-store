@@ -1,5 +1,5 @@
 import React from "react";
-import { Hero } from "../components";
+import { FeaturedProducts, Hero } from "../components";
 import { customFetch } from "../utils";
 
 export const landingLoader = async () => {
@@ -12,6 +12,7 @@ const Landing = () => {
   return (
     <>
       <Hero />
+      <FeaturedProducts />
     </>
   );
 };
