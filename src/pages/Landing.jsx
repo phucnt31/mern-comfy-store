@@ -1,7 +1,12 @@
 import React from "react";
+import { Hero } from "../components";
 
 const Landing = () => {
-  return <div>Landing</div>;
+  return (
+    <>
+      <Hero />
+    </>
+  );
 };
 
 export default Landing;
