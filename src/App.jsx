@@ -8,6 +8,7 @@ import {
   HomeLayout,
   Landing,
   Login,
+  Orders,
   Products,
   Register,
   SingleProduct,
@@ -43,6 +44,10 @@ const App = () => {
         {
           path: "/checkout",
           element: <Checkout />,
+        },
+        {
+          path: "/orders",
+          element: <Orders />,
         },
       ],
     },
