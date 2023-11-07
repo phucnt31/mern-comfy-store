@@ -20,6 +20,9 @@ import { landingLoader } from "./pages/Landing";
 import { singleProductLoader } from "./pages/SingleProduct";
 import { productsLoader } from "./pages/Products";
 
+// action
+import { registerAction } from "./pages/Register";
+
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -72,6 +75,7 @@ const App = () => {
       path: "/register",
       element: <Register />,
       errorElement: <Error />,
+      action: registerAction,
     },
   ]);
 
