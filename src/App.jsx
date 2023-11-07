@@ -24,6 +24,7 @@ import { productsLoader } from "./pages/Products";
 // action
 import { registerAction } from "./pages/Register";
 import { loginAction } from "./pages/Login";
+import { checkoutLoader } from "./pages/Checkout";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -61,6 +62,7 @@ const App = () => {
         {
           path: "/checkout",
           element: <Checkout />,
+          loader: checkoutLoader(store),
         },
         {
           path: "/orders",
