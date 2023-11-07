@@ -81,7 +81,7 @@ const App = () => {
           path: "/orders",
           element: <Orders />,
           errorElement: <ErrorElement />,
-          loader: ordersLoader(store),
+          loader: ordersLoader(store, queryClient),
         },
       ],
     },
