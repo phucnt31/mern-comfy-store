@@ -59,7 +59,7 @@ const App = () => {
           path: "/products",
           element: <Products />,
           errorElement: <ErrorElement />,
-          loader: productsLoader,
+          loader: productsLoader(queryClient),
         },
         {
           path: "/products/:id",
