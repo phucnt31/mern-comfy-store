@@ -41,8 +41,9 @@ export const checkoutAction =
       const errorMessage =
         error?.response?.data?.error?.message ||
         "there was an error placing your order";
-
       toast.error(errorMessage);
+      if (error?.response?.status === 401 || 403) return redirect("/login");
+
       return null;
     }
   };
