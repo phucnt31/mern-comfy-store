@@ -26,6 +26,7 @@ import { registerAction } from "./pages/Register";
 import { loginAction } from "./pages/Login";
 import { checkoutLoader } from "./pages/Checkout";
 import { checkoutAction } from "./components/CheckoutForm";
+import { ordersLoader } from "./pages/Orders";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -69,6 +70,8 @@ const App = () => {
         {
           path: "/orders",
           element: <Orders />,
+          errorElement: <ErrorElement />,
+          loader: ordersLoader(store),
         },
       ],
     },

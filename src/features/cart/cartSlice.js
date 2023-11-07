@@ -20,7 +20,6 @@ const cartSlice = createSlice({
     addItem: (state, action) => {
       const { product } = action.payload;
       const item = state.cartItems.find((i) => i.cartID === product.cartID);
-      console.log(state.cartItems);
       if (item) {
         item.amount += product.amount;
       } else {
