@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { customFetch, formatPrice, generateAmountOptions } from "../utils";
 import { useDispatch } from "react-redux";
+import { addItem } from "../features/cart/cartSlice";
 
 export const singleProductLoader = async ({ params }) => {
   const resp = await customFetch.get(`/products/${params.id}`);
@@ -32,7 +33,7 @@ const SingleProduct = () => {
     dispatch(addItem({ product: cartProduct }));
   };
   const handleAmount = (e) => {
-    setAmount(e.target.value);
+    setAmount(parseInt(e.target.value));
   };
 
   return (
