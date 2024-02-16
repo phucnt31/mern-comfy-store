@@ -1,9 +1,9 @@
-import { nanoid } from "nanoid";
+import { StatusCodes } from "http-status-codes";
 import ProductModel from "../models/ProductModel.js";
 
 export const getAllProducts = async (req, res) => {
   const products = await ProductModel.find({});
-  res.status(200).json({ attributes: products });
+  res.status(StatusCodes.OK).json({ attributes: products });
 };
 
 export const getSingleProduct = async (req, res) => {
@@ -12,25 +12,25 @@ export const getSingleProduct = async (req, res) => {
   if (!product) {
     return res.status(404).json({ msg: "Product not found" });
   }
-  res.status(200).json(product);
+  res.status(StatusCodes.OK).json(product);
 };
 
 export const createProduct = async (req, res) => {
   const { title, company, description, price } = req.body;
   if (!title || !company || !description || !price) {
     res
-      .status(400)
+      .status(StatusCodes.BAD_REQUEST)
       .json({ msg: "Please provide title, company, description or price" });
     return;
   }
   const product = await ProductModel.create(req.body);
-  res.status(201).json({ product });
+  res.status(StatusCodes.CREATED).json({ product });
 };
 
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
   if (!id) {
-    res.status(400).json({ msg: "Id not match" });
+    res.status(StatusCodes.BAD_REQUEST).json({ msg: "Id not match" });
     return;
   }
 
@@ -38,18 +38,20 @@ export const updateProduct = async (req, res) => {
     new: true,
   });
   if (!updatedProduct) {
-    res.status(404).json({ msg: "Product not found" });
+    res.status(StatusCodes.NOT_FOUND).json({ msg: "Product not found" });
     return;
   }
-  res.status(200).json({ product: updatedProduct });
+  res.status(StatusCodes.OK).json({ product: updatedProduct });
 };
 
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
   const deletedProduct = await ProductModel.findByIdAndDelete(id);
   if (!deletedProduct) {
-    return res.status(404).json({ msg: `no product with id ${id}` });
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ msg: `no product with id ${id}` });
   }
 
-  res.status(200).json({ msg: "product deleted" });
+  res.status(StatusCodes.OK).json({ msg: "product deleted" });
 };
