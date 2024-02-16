@@ -11,6 +11,9 @@ const withValidationErrors = (validateValues) => {
       if (!errors.isEmpty()) {
         const errorMessages = errors.array().map((error) => error.msg);
         console.log(errorMessages);
+        if (errorMessages[0].startsWith("No product")) {
+          throw new NotFoundError(errorMessages);
+        }
         throw new BadRequestError(errorMessages);
       }
       next();
