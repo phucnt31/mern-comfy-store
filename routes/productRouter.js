@@ -6,7 +6,10 @@ import {
   getSingleProduct,
   updateProduct,
 } from "../controllers/productController.js";
-import { validateProductInput } from "../middleware/validationMiddleware.js";
+import {
+  validateIdParam,
+  validateProductInput,
+} from "../middleware/validationMiddleware.js";
 
 const productRoute = Router();
 
@@ -16,7 +19,7 @@ productRoute
   .post(validateProductInput, createProduct);
 productRoute
   .route("/:id")
-  .get(getSingleProduct)
+  .get(validateIdParam, getSingleProduct)
   .patch(validateProductInput, updateProduct)
   .delete(deleteProduct);
 

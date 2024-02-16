@@ -1,6 +1,7 @@
-import { body, validationResult } from "express-validator";
-import { BadRequestError } from "../errors/customErrors.js";
+import { body, param, validationResult } from "express-validator";
+import { BadRequestError, NotFoundError } from "../errors/customErrors.js";
 import { PRODUCT_CATEGORY, PRODUCT_COMPANY } from "../utils/constants.js";
+import ProductModel from "../models/ProductModel.js";
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -40,4 +41,16 @@ export const validateProductInput = withValidationErrors([
     .withMessage("Category is required")
     .isIn(Object.values(PRODUCT_CATEGORY))
     .withMessage("Invalid category values"),
+]);
+
+export const validateIdParam = withValidationErrors([
+  param("id")
+    .isMongoId()
+    .withMessage("invalid MongoDB id")
+    .custom(async (value) => {
+      const product = await ProductModel.findById(value);
+      if (!product) {
+        throw new NotFoundError(`No product with id ${value}`);
+      }
+    }),
 ]);
