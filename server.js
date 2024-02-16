@@ -6,6 +6,7 @@ import "express-async-errors";
 
 // routes
 import productRoute from "./routes/productRouter.js";
+import authRoute from "./routes/authRouter.js";
 
 // middleware
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/products", productRoute);
+app.use("/api/v1/auth", authRoute);
 
 app.use("*", (req, res) => {
   res.status(404).json({ msg: "Route not found" });
