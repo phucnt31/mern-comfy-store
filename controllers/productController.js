@@ -1,4 +1,5 @@
 import { nanoid } from "nanoid";
+import ProductModel from "../models/ProductModel.js";
 
 let products = [
   { id: nanoid(), title: "avant-garde lamp", company: "Modenza" },
@@ -18,15 +19,21 @@ export const getSingleProduct = (req, res) => {
   res.status(200).json({ product });
 };
 
-export const createProduct = (req, res) => {
-  const { title, company } = req.body;
-  if (!title || !company) {
-    res.status(400).json({ msg: "Please provide title or company" });
-    return;
+export const createProduct = async (req, res) => {
+  const { title, company, description, price } = req.body;
+  try {
+    if (!title || !company || !description || !price) {
+      res
+        .status(400)
+        .json({ msg: "Please provide title, company, description or price" });
+      return;
+    }
+    const product = await ProductModel.create(req.body);
+    res.status(201).json({ product });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "server error" });
   }
-  const product = { id: nanoid(), title, company };
-  products.push(product);
-  res.status(201).json({ product });
 };
 
 export const updateProduct = (req, res) => {
