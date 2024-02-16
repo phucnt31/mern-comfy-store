@@ -2,6 +2,7 @@ import { body, param, validationResult } from "express-validator";
 import { BadRequestError, NotFoundError } from "../errors/customErrors.js";
 import { PRODUCT_CATEGORY, PRODUCT_COMPANY } from "../utils/constants.js";
 import ProductModel from "../models/ProductModel.js";
+import UserModel from "../models/UserModel.js";
 
 const withValidationErrors = (validateValues) => {
   return [
@@ -22,12 +23,12 @@ const withValidationErrors = (validateValues) => {
 };
 
 export const validateProductInput = withValidationErrors([
-  body("title").notEmpty().withMessage("title is required").trim(),
+  body("title").notEmpty().withMessage("Title is required").trim(),
   body("description")
     .notEmpty()
     .withMessage("Description is required")
     .isLength({ min: 20, max: 400 })
-    .withMessage("description must be between 20 and 400 characters long")
+    .withMessage("Description must be between 20 and 400 characters long")
     .trim(),
   body("price")
     .notEmpty()
@@ -56,4 +57,28 @@ export const validateIdParam = withValidationErrors([
         throw new NotFoundError(`No product with id ${value}`);
       }
     }),
+]);
+
+export const validateRegisterUserInput = withValidationErrors([
+  body("username")
+    .notEmpty()
+    .withMessage("Username is required")
+    .isLength({ min: 4, max: 10 })
+    .withMessage("Username must be between 4 and 10 characters long"),
+  body("email")
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("invalid email format")
+    .custom(async (email) => {
+      const user = await UserModel.findOne({ email });
+      if (user) {
+        throw new BadRequestError("email already exists");
+      }
+    }),
+  body("password")
+    .notEmpty()
+    .withMessage("Password is required")
+    .isLength({ min: 8 })
+    .withMessage("Password must be 8 characters long"),
 ]);
