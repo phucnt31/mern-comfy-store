@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
+import mongoose from "mongoose";
 
 // routes
 import productRoute from "./routes/productRouter.js";
@@ -37,9 +38,11 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 5200;
 try {
+  await mongoose.connect(process.env.MONGO_URL);
   app.listen(port, () => {
     console.log(`server running on PORT ${port}....`);
   });
 } catch (error) {
   console.log(error);
+  process.exit(1);
 }
