@@ -20,7 +20,7 @@ productRoute
 productRoute
   .route("/:id")
   .get(validateIdParam, getSingleProduct)
-  .patch(validateProductInput, updateProduct)
-  .delete(deleteProduct);
+  .patch(validateIdParam, validateProductInput, updateProduct)
+  .delete(validateIdParam, deleteProduct);
 
 export default productRoute;
