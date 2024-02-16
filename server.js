@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
 import mongoose from "mongoose";
+import "express-async-errors";
 
 // routes
 import productRoute from "./routes/productRouter.js";
