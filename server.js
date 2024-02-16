@@ -9,7 +9,6 @@ import productRoute from "./routes/productRouter.js";
 
 // middleware
 import errorHandlerMiddleware from "./middleware/errorHandlerMiddleware.js";
-import { validateTest } from "./middleware/validationMiddleware.js";
 
 const app = express();
 dotenv.config();
@@ -22,11 +21,6 @@ if (process.env.NODE_ENV === "development") {
 
 app.get("/", (req, res) => {
   res.send("Hello world");
-});
-
-app.post("/api/v1/test", validateTest, (req, res) => {
-  const { name } = req.body;
-  res.json({ msg: `hello ${name}` });
 });
 
 app.use("/api/v1/products", productRoute);

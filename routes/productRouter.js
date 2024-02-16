@@ -6,14 +6,18 @@ import {
   getSingleProduct,
   updateProduct,
 } from "../controllers/productController.js";
+import { validateProductInput } from "../middleware/validationMiddleware.js";
 
 const productRoute = Router();
 
-productRoute.route("/").get(getAllProducts).post(createProduct);
+productRoute
+  .route("/")
+  .get(getAllProducts)
+  .post(validateProductInput, createProduct);
 productRoute
   .route("/:id")
   .get(getSingleProduct)
-  .patch(updateProduct)
+  .patch(validateProductInput, updateProduct)
   .delete(deleteProduct);
 
 export default productRoute;

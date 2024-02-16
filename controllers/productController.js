@@ -17,8 +17,8 @@ export const getSingleProduct = async (req, res) => {
 };
 
 export const createProduct = async (req, res) => {
-  const { title, company, description, price } = req.body;
-  if (!title || !company || !description || !price) {
+  const { title, description, price } = req.body;
+  if (!title || !description || !price) {
     res
       .status(StatusCodes.BAD_REQUEST)
       .json({ msg: "Please provide title, company, description or price" });
