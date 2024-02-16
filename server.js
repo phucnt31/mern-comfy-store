@@ -26,6 +26,15 @@ app.post("/", (req, res) => {
 
 app.use("/api/v1/products", productRoute);
 
+app.use("*", (req, res) => {
+  res.status(404).json({ msg: "Route not found" });
+});
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json({ msg: "something went wrong" });
+});
+
 const port = process.env.PORT || 5200;
 try {
   app.listen(port, () => {
