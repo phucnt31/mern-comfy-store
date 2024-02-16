@@ -1,9 +1,14 @@
 import mongoose from "mongoose";
+import { PRODUCT_CATEGORY, PRODUCT_COMPANY } from "../utils/constants";
 
 const ProductSchema = new mongoose.Schema(
   {
     title: String,
-    company: String,
+    company: {
+      type: String,
+      enum: Object.values(PRODUCT_COMPANY),
+      default: PRODUCT_COMPANY.MODENZA,
+    },
     description: String,
     featured: {
       type: Boolean,
@@ -11,8 +16,8 @@ const ProductSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ["Tables", "Chairs", "Kids", "Sofas", "Beds"],
-      default: "Tables",
+      enum: Object.values(PRODUCT_CATEGORY),
+      default: PRODUCT_CATEGORY.TABLES,
     },
     price: Number,
     shipping: {
