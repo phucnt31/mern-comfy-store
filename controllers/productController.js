@@ -1,5 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import ProductModel from "../models/ProductModel.js";
+import { NotFoundError } from "../errors/customErrors.js";
 
 export const getAllProducts = async (req, res) => {
   const products = await ProductModel.find({});
@@ -10,7 +11,7 @@ export const getSingleProduct = async (req, res) => {
   const { id } = req.params;
   const product = await ProductModel.findById(id);
   if (!product) {
-    return res.status(404).json({ msg: "Product not found" });
+    throw new NotFoundError(`No product with id ${id}`);
   }
   res.status(StatusCodes.OK).json(product);
 };
@@ -38,8 +39,7 @@ export const updateProduct = async (req, res) => {
     new: true,
   });
   if (!updatedProduct) {
-    res.status(StatusCodes.NOT_FOUND).json({ msg: "Product not found" });
-    return;
+    throw new NotFoundError(`No product with id ${id}`);
   }
   res.status(StatusCodes.OK).json({ product: updatedProduct });
 };
@@ -48,9 +48,7 @@ export const deleteProduct = async (req, res) => {
   const { id } = req.params;
   const deletedProduct = await ProductModel.findByIdAndDelete(id);
   if (!deletedProduct) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ msg: `no product with id ${id}` });
+    throw new NotFoundError(`No product with id ${id}`);
   }
 
   res.status(StatusCodes.OK).json({ msg: "product deleted" });
