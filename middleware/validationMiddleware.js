@@ -1,6 +1,5 @@
 import { body, param, validationResult } from "express-validator";
 import { BadRequestError, NotFoundError } from "../errors/customErrors.js";
-import { PRODUCT_CATEGORY, PRODUCT_COMPANY } from "../utils/constants.js";
 import ProductModel from "../models/ProductModel.js";
 import UserModel from "../models/UserModel.js";
 
