@@ -6,9 +6,6 @@ import { createJWT } from "../utils/tokenUtils.js";
 
 export const register = async (req, res) => {
   const { password } = req.body;
-  const isFirstAccount =
-    (await UserModel.countDocuments()) === 0 ? "admin" : "user";
-  req.body.role = isFirstAccount;
   req.body.password = await hashPassword(password);
   await UserModel.create(req.body);
   res.status(StatusCodes.CREATED).json({ msg: "User created" });
@@ -28,7 +25,11 @@ export const login = async (req, res) => {
     throw new UnauthorizedError("Incorrect password");
   }
 
-  const token = createJWT({ userId: user._id, role: user.role });
+  const token = createJWT({
+    userId: user._id,
+    username: user.username,
+    email: user.email,
+  });
   const oneDay = 1000 * 60 * 60 * 24;
   res.cookie("token", token, {
     httpOnly: true,
