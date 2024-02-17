@@ -3,6 +3,7 @@ import ProductModel from "../models/ProductModel.js";
 import { NotFoundError } from "../errors/customErrors.js";
 
 export const getAllProducts = async (req, res) => {
+  console.log(req);
   const products = await ProductModel.find({});
   res.status(StatusCodes.OK).json({ attributes: products });
 };
