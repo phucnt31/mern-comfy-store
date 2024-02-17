@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { login, register } from "../controllers/authController.js";
+import { login, logout, register } from "../controllers/authController.js";
 import {
   validateLoginUserInput,
   validateRegisterUserInput,
@@ -9,5 +9,6 @@ const authRoute = Router();
 
 authRoute.route("/register").post(validateRegisterUserInput, register);
 authRoute.route("/login").post(validateLoginUserInput, login);
+authRoute.get("/logout", logout);
 
 export default authRoute;
