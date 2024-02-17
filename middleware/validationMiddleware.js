@@ -66,3 +66,20 @@ export const validateLoginUserInput = withValidationErrors([
     .withMessage("invalid email format"),
   body("password").notEmpty().withMessage("password is required"),
 ]);
+
+export const validateOrderInput = withValidationErrors([
+  body("address")
+    .notEmpty()
+    .withMessage("Address is required")
+    .isLength({ min: 8, max: 40 })
+    .withMessage("Address must be between 8 and 40 characters long"),
+  body("name")
+    .notEmpty()
+    .withMessage("Name is required")
+    .isLength({ min: 5, max: 25 })
+    .withMessage("Name must be between 5 and 25 characters long"),
+  body("chargeTotal").isNumeric().withMessage("Charge total must be a number"),
+  body("numItemsInCart")
+    .isNumeric()
+    .withMessage("Number of items in cart must be a number"),
+]);
