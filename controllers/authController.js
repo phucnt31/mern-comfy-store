@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import UserModel from "../models/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/passwordUtils.js";
 import { UnauthorizedError } from "../errors/customErrors.js";
+import { createJWT } from "../utils/tokenUtils.js";
 
 export const register = async (req, res) => {
   const { password } = req.body;
@@ -27,5 +28,7 @@ export const login = async (req, res) => {
     throw new UnauthorizedError("Incorrect password");
   }
 
-  res.status(StatusCodes.OK).json({ msg: "Login successfully" });
+  const token = createJWT({ userId: user._id, role: user.role });
+  console.log(token);
+  res.status(StatusCodes.OK).json({ msg: "User logged in" });
 };
