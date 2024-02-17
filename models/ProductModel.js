@@ -10,6 +10,10 @@ const ProductSchema = new mongoose.Schema(
       default: PRODUCT_COMPANY.MODENZA,
     },
     description: String,
+    image: {
+      type: String,
+      required: true,
+    },
     featured: {
       type: Boolean,
       default: false,
