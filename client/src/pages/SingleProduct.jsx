@@ -17,12 +17,13 @@ export const singleProductLoader =
     const response = await queryClient.ensureQueryData(
       singleProductQuery(params.id)
     );
+    console.log(response.data.data);
     return { product: response.data.data };
   };
 
 const SingleProduct = () => {
   const { product } = useLoaderData();
-  const { image, title, company, price, description, colors } =
+  const { image, title, company, price, description, colors, _id } =
     product.attributes;
   const dollarsAmount = formatPrice(price);
   const [productColor, setProductColor] = useState(colors[0]);
@@ -30,8 +31,8 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
 
   const cartProduct = {
-    cartID: product.id + productColor,
-    productID: product.id,
+    cartID: _id + productColor,
+    productID: _id,
     image,
     title,
     price,

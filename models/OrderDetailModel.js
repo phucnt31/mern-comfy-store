@@ -13,10 +13,10 @@ const OrderDetailSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // image: {
-  //   type: String,
-  //   required: true,
-  // },
+  image: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,
@@ -32,6 +32,11 @@ const OrderDetailSchema = new mongoose.Schema({
   productID: {
     type: mongoose.Schema.ObjectId,
     ref: "Product",
+    required: true,
+  },
+  orderID: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Order",
     required: true,
   },
 });

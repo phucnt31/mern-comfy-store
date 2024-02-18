@@ -24,15 +24,7 @@ export const checkoutAction =
       numItemsInCart,
     };
     try {
-      const response = await customFetch.post(
-        "/orders",
-        { data: info },
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
+      const response = await customFetch.post("/orders", { data: info });
       // remove query
       queryClient.removeQueries(["orders"]);
       store.dispatch(clearCart());
@@ -41,10 +33,13 @@ export const checkoutAction =
     } catch (error) {
       console.log(error);
       const errorMessage =
-        error?.response?.data?.error?.message ||
+        error?.response?.data?.message ||
         "there was an error placing your order";
       toast.error(errorMessage);
-      if (error?.response?.status === 401 || 403) return redirect("/login");
+      console.log(error.response.status);
+      // if (error?.response?.status === 401 || error?.response?.status === 403) {
+      //   return redirect("/login");
+      // }
 
       return null;
     }

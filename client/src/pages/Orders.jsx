@@ -18,9 +18,6 @@ export const ordersQuery = (params, user) => {
     queryFn: () =>
       customFetch.get("/orders", {
         params,
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
       }),
   };
 };
@@ -49,11 +46,13 @@ export const ordersLoader =
     } catch (error) {
       console.log(error);
       const errorMessage =
-        error?.response?.data?.error?.message ||
+        error?.response?.data?.message ||
         "there was an error accessing your orders";
 
       toast.error(errorMessage);
-      if (error?.response?.status === 401 || 403) return redirect("/login");
+      if (error?.response?.status === 401 || error?.response?.status === 403) {
+        return redirect("/login");
+      }
       return null;
     }
   };

@@ -67,18 +67,14 @@ export const validateLoginUserInput = withValidationErrors([
 ]);
 
 export const validateOrderInput = withValidationErrors([
-  body("address")
+  body("data.address")
     .notEmpty()
     .withMessage("Address is required")
-    .isLength({ min: 8, max: 40 })
-    .withMessage("Address must be between 8 and 40 characters long"),
-  body("name")
+    .isLength({ min: 5, max: 40 })
+    .withMessage("Address must be between 5 and 40 characters long"),
+  body("data.name")
     .notEmpty()
     .withMessage("Name is required")
-    .isLength({ min: 5, max: 25 })
-    .withMessage("Name must be between 5 and 25 characters long"),
-  body("chargeTotal").isNumeric().withMessage("Charge total must be a number"),
-  body("numItemsInCart")
-    .isNumeric()
-    .withMessage("Number of items in cart must be a number"),
+    .isLength({ min: 3, max: 25 })
+    .withMessage("Name must be between 3 and 25 characters long"),
 ]);
