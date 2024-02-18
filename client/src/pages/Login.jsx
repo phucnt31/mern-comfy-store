@@ -11,15 +11,14 @@ export const loginAction =
     const formData = await request.formData();
     const data = Object.fromEntries(formData);
     try {
-      const response = await customFetch.post("/auth/local", data);
-
+      const response = await customFetch.post("/auth/login", data);
       store.dispatch(loginUser(response.data));
       toast.success("logged in successfully");
       return redirect("/");
     } catch (error) {
       console.log(error);
       const errorMessage =
-        error?.response?.data?.error?.message ||
+        error?.response?.data?.message ||
         "please double check your credentials";
 
       toast.error(errorMessage);
@@ -34,8 +33,8 @@ const Login = () => {
   const loginAsGuestUser = async () => {
     try {
       const response = await customFetch.post("/auth/local", {
-        identifier: "test@test.com",
-        password: "secret",
+        email: "test@test.com",
+        password: "secret123",
       });
       dispatch(loginUser(response.data));
       toast.success("welcome guest user");
@@ -53,7 +52,7 @@ const Login = () => {
         method="post"
       >
         <h4 className="text-center text-3xl font-bold">Login</h4>
-        <FormInput label="email" type="email" name="identifier" />
+        <FormInput label="email" type="email" name="email" />
         <FormInput label="password" type="password" name="password" />
         <div className="mt-4">
           <SubmitBtn text="login" />

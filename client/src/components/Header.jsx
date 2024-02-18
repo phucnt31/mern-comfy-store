@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logoutUser } from "../features/user/userSlice";
 import { clearCart } from "../features/cart/cartSlice";
 import { useQueryClient } from "@tanstack/react-query";
+import { customFetch } from "../utils";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Header = () => {
   const handleLogout = () => {
     navigate("/");
     dispatch(clearCart());
+    customFetch.get("/auth/logout");
     dispatch(logoutUser());
     queryClient.removeQueries();
   };
