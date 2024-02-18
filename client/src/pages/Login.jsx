@@ -32,7 +32,7 @@ const Login = () => {
 
   const loginAsGuestUser = async () => {
     try {
-      const response = await customFetch.post("/auth/local", {
+      const response = await customFetch.post("/auth/login", {
         email: "test@test.com",
         password: "secret123",
       });
