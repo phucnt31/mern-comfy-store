@@ -24,8 +24,8 @@ export const getAllProducts = async (req, res) => {
   }
 
   const orderOptions = {
-    low: "-price",
-    high: "price",
+    low: "price",
+    high: "-price",
     "a-z": "title",
     "z-a": "-title",
   };
@@ -39,6 +39,7 @@ export const getAllProducts = async (req, res) => {
   const totalProducts = await ProductModel.countDocuments(queryObject);
   const products = await ProductModel.find(queryObject)
     .sort(orderKey)
+    .collation({ locale: "en" })
     .skip(skip)
     .limit(limit);
   const numOfPages = Math.ceil(totalProducts / limit);
@@ -52,8 +53,8 @@ export const getAllProducts = async (req, res) => {
         pageCount: numOfPages,
         total: totalProducts,
       },
-      categories: Object.values(PRODUCT_CATEGORY),
-      companies: Object.values(PRODUCT_COMPANY),
+      categories: ["all", ...Object.values(PRODUCT_CATEGORY)],
+      companies: ["all", ...Object.values(PRODUCT_COMPANY)],
     },
   });
 };

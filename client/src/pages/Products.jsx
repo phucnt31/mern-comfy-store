@@ -5,7 +5,7 @@ import { Filters, PaginationContainer, ProductsContainer } from "../components";
 const url = "/products";
 
 const allProductsQuery = (queryParams) => {
-  const { search, category, company, sort, price, shipping, page } =
+  const { search, category, company, order, price, shipping, page } =
     queryParams;
 
   return {
@@ -14,7 +14,7 @@ const allProductsQuery = (queryParams) => {
       search ?? "",
       category ?? "all",
       company ?? "all",
-      sort ?? "a-z",
+      order ?? "a-z",
       price ?? 100000,
       shipping ?? false,
       page ?? 1,
