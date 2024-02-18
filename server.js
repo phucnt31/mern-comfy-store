@@ -4,6 +4,8 @@ import * as dotenv from "dotenv";
 import mongoose from "mongoose";
 import "express-async-errors";
 import cookieParser from "cookie-parser";
+import helmet from "helmet";
+import mongoSanitize from "express-mongo-sanitize";
 
 // routes
 import productRoute from "./routes/productRouter.js";
@@ -19,6 +21,8 @@ dotenv.config();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(helmet());
+app.use(mongoSanitize());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
