@@ -1,7 +1,7 @@
 ## Information
 
-- Complete Project: https://react-vite-comfy-store.netlify.app
-- API DOCS: https://documenter.getpostman.com/view/18152321/2s9Xy5KpTi
+- Complete Project: https://mern-comfy-store.onrender.com
+- API DOCS: https://documenter.getpostman.com/view/18361510/2sA2r81iWD#ffd69aa3-c94f-4151-ad57-29c8ac88b5fa
 
 ## Setup Tailwind
 
