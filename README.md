@@ -1,5 +1,7 @@
 ## Information
 
+- Welcome to Comfy Store, a full-stack MERN (MongoDB, Express.js, React, Node.js) project designed for selling furniture. This project provides users with the ability to browse various furniture items, search for specific products, and make purchases. Comfy Store utilizes a range of technologies to create a seamless and user-friendly online furniture shopping experience.
+
 - Complete Project: https://mern-comfy-store.onrender.com
 - API DOCS: https://documenter.getpostman.com/view/18361510/2sA2r81iWD#ffd69aa3-c94f-4151-ad57-29c8ac88b5fa
 
